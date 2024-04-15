@@ -1,0 +1,110 @@
+Algorithme EXO_01
+Fonction tableau_verite(vari : tableau, expression : chaine)
+    nombre_de_ligne : 2 ** (taille(var))
+    premiere_ligne : joindre (vari, " |")
+    Ecrire (premiere_ligne, "Résultats")
+    Ecrire ("-" *70)
+    maxtermes <- []
+    mintermes <-[]
+    Pour w allant de 0 à nombre_de_ligne faire
+        ligne <- []
+        binaire : convertir_en_binaire(w)][3:]
+        binaire <- zfill(binaire, taille(vari))
+        Ajouter(ligne, binaire)
+        Solution = kajikajy(vari, binaire, expression)
+        ajouter(ligne, val(solution))
+        Ecrire(joindre (ligne, " |")
+        Composee <- joindre(vari, " |")
+        Pour m allant de 0 à taille(vari) faire
+            Si val(binaire[m]) == 0 alors
+                prime <- vari[m] + " '"
+                Composee <- remplacer (joindre(vari, ""), vari[m], prime)
+            F = val (Solution)
+            Si F == 1 alors
+                Y <- split (Composee, "+")
+                Composee <- joindre(Y, "")
+                Ajouter (maxtermes, composee)
+            Sinon
+                Ajouter(mintermes, composee )
+dfc : joindre (mintermes, ")*(")
+M <- joindre (maxtermes, "+")
+Ecrire("la première forme canonique est : f =", M)
+Ecrire ("Et la deuxième forme canonique est g =", dfc)
+Fin fonction
+
+Fonction kajikajy (vari:tableau, binaire:chaîne, expression :chaine)
+    Stockage_var <-{vari[i] : binaire [i] pour i allant de 0 à taille(vari)}
+    Pour chaque clé, valeur dans stockage_var faire
+    expression <- remplacer (clé, convch(valeur))
+    Z = evaluer_expression (expression)
+    Retourner Z
+Finfonction
+
+Fonction joindre(tableau, separateur: chaine)
+    resultat <- ""
+    Pour chaque element dans tableau
+        resultat <- resultat + separateur + element 
+    Fin Pour
+    Retourner resultat
+Fin Fonction
+
+Fonction convertir_en_binaire(nombre)
+    resultat <- ""
+    Tant que nombre > 0
+        bit <- nombre % 2
+        resultat <- Chaîne(bit) + resultat
+        nombre <- nombre / 2
+    Fin Tant que
+    Retourner resultat
+Fin Fonction
+
+Fonction evaluer_expression(expression)
+    pile <- Pile()
+    Pour chaque token dans expression
+        Si token est un opérateur Alors
+            operande2 <- Dépiler(pile)
+            operande1 <- Dépiler(pile)
+            resultat <- Appliquer_operateur(token, operande1, operande2)
+            Empiler(pile, resultat)
+        Sinon
+            Empiler(pile, token)
+        Fin Si
+    Fin Pour
+    Retourner Sommet(pile)
+Fin Fonction
+
+Fonction zfill(chaine, longueur)
+    zéros_necessaires <- longueur - longueur(chaine)
+    Si zéros_necessaires > 0 Alors
+        chaine <- répéter("0", zéros_necessaires) + chaine
+    Fin Si
+    Retourner chaine
+Fin Fonction
+
+Fonction split(chaine, delimiteur)
+    sous_chaines <- Liste()
+    sous_chaine_actuelle <- ""
+    Pour chaque caractère dans chaine
+        Si caractère == delimiteur Alors
+            Ajouter(sous_chaines, sous_chaine_actuelle)
+            sous_chaine_actuelle <- ""
+        Sinon
+            sous_chaine_actuelle <- concatener(sous_chaine_actuelle, caractère)
+        Fin Si
+    Fin Pour
+    Ajouter(sous_chaines, sous_chaine_actuelle)  # Ajoute la dernière sous-chaîne
+    Retourner sous_chaines
+Fin Fonction
+
+Début algorithme
+Vari<- []
+Ecrire ("entrer le nombre de variables:")
+Lire (n)
+Pour i allant de 0 à n
+    Ecrire ("entrer la variables" i)
+    Lire (xi) 
+    Ajouter (vari, xi)
+Fin pour
+Ecrire("Entrez la fonction logique'")
+Lire(expression)
+Table= tableau_verite(vari, expression)
