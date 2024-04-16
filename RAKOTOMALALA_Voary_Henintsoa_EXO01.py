@@ -15,6 +15,7 @@ def tableau_verite(variables, expression):
         ligne.append(str(int(solution)))
         print(" | ".join(ligne))
         composee = "+".join(variables)
+     #Par la suite, pour chaque proposition X, not X = X'
         for m in range(len(variables)):
             if int(binaire[m]) == 0:
                 prime = "{}'".format(variables[m])
@@ -27,6 +28,7 @@ def tableau_verite(variables, expression):
             maxtermes.append(composee)
         else:
             mintermes.append(composee)
+    print("Notons que pour chaque proposition X, not X = X'") 
     dfc = ")*(".join(mintermes)
     print("la premiere forme canonique est : f = ", "+".join(maxtermes))
     print("et la deuxieme forme canonique est : g = ({})".format(dfc))
